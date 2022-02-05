@@ -1,0 +1,142 @@
+vector <Point> trajectoire(Piece tmp,int joueur)
+{
+    int i,j,k,l;
+    vector<Point> tableau;
+    string str=tmp.getNomPiece();
+    
+
+    if (tmp.getNomPiece()=="K") //Roi
+    {
+        tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()) );
+        tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()) );
+        tableau.push_back(Point (tmp.getAbs(),tmp.getOrd()+1) );
+        tableau.push_back(Point (tmp.getAbs(),tmp.getOrd()-1) );
+        tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()-1) );
+        tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()+1) );
+        tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()-1) );
+        tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()+1) );
+    }
+    else if(tmp.getNomPiece()=="Q")//Reine
+    {
+        //----------------Dépalcement Roi----------------------
+        tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()) );
+        tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()) );
+        tableau.push_back(Point (tmp.getAbs(),tmp.getOrd()+1) );
+        tableau.push_back(Point (tmp.getAbs(),tmp.getOrd()-1) );
+        tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()-1) );
+        tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()+1) );
+        tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()-1) );
+        tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()+1) );
+
+        //----------------Dépalcement Tour----------------------
+
+        for ( j = 0; j < 8; j++)
+        {
+            tableau.push_back(Point (tmp.getAbs(),j));
+            
+        }
+        for ( i = 0; i < 8; i++)
+        {
+            tableau.push_back(Point (i,tmp.getOrd()));
+        }
+        
+
+        //----------------Dépalcement Fou----------------------
+
+        for ( i = tmp.getAbs()-1,j=tmp.getOrd()+1; i >=0 && j<8; i--,j++){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+        for ( i = tmp.getAbs()-1,j=tmp.getOrd()-1; i >=0 && j>=0; i--,j--){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+        for ( i = tmp.getAbs()+1,j=tmp.getOrd()+1; i <8 && j<8; i++,j++){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+        for ( i = tmp.getAbs()+1,j=tmp.getOrd()-1; i <8 && j>0; i++,j--){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+        
+    }
+    else if(tmp.getNomPiece()=="P") //Pion
+    {
+        if (joueur==1)
+        {
+            tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()+1) );
+            tableau.push_back(Point (tmp.getAbs()-1,tmp.getOrd()-1) );
+
+            
+        }
+        else if(joueur==2)
+        {
+            tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()+1) );
+            tableau.push_back(Point (tmp.getAbs()+1,tmp.getOrd()-1) );
+        }
+    }
+    else if(tmp.getNomPiece()=="T") //Tour
+    {
+        for ( j = 0; j < 8; j++)
+        {
+            tableau.push_back(Point (tmp.getAbs(),j));
+            
+        }
+        for ( i = 0; i < 8; i++)
+        {
+            tableau.push_back(Point (i,tmp.getOrd()));
+        }
+    }
+    else if(tmp.getNomPiece()=="F") //Fou
+    {
+        for ( i = tmp.getAbs()-1,j=tmp.getOrd()+1; i >=0 && j<8; i--,j++){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+        for ( i = tmp.getAbs()-1,j=tmp.getOrd()-1; i >=0 && j>=0; i--,j--){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+        for ( i = tmp.getAbs()+1,j=tmp.getOrd()+1; i <8 && j<8; i++,j++){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+        for ( i = tmp.getAbs()+1,j=tmp.getOrd()-1; i <8 && j>0; i++,j--){
+            tableau.push_back(Point (i,j) );
+            
+            
+        }
+    }
+    else if(tmp.getNomPiece()=="C") //Cavalier
+    {
+        tableau.push_back(Point(tmp.getAbs()+2,tmp.getOrd()-1));
+        tableau.push_back(Point(tmp.getAbs()+1,tmp.getOrd()-2));
+        tableau.push_back(Point(tmp.getAbs()+2,tmp.getOrd()+1));
+        tableau.push_back(Point(tmp.getAbs()+1,tmp.getOrd()+2));
+        tableau.push_back(Point(tmp.getAbs()-2,tmp.getOrd()-1));
+        tableau.push_back(Point(tmp.getAbs()-1,tmp.getOrd()-2));
+        tableau.push_back(Point(tmp.getAbs()-2,tmp.getOrd()+1));
+        tableau.push_back(Point(tmp.getAbs()-1,tmp.getOrd()+2));
+    }
+    else 
+    {
+        
+    }
+    
+    
+    
+    
+
+
+
+return tableau;
+
+}
